@@ -1,27 +1,28 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-import Header from "./components/Header";
+import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import LogTrip from "./pages/LogTrip";
-import Trips from "./pages/Trips";
+import MyTrips from "./pages/MyTrips";
 import TripDetails from "./pages/TripDetails";
+import About from "./pages/About";
 import NotFound from "./pages/NotFound";
-
-import "./styles/App.css";
+import { TripProvider } from "./context/TripContext";
 
 function App() {
   return (
     <BrowserRouter>
-      <Header />
-      <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/log" element={<LogTrip />} />
-          <Route path="/trips" element={<Trips />} />
-          <Route path="/trips/:id" element={<TripDetails />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </main>
+      <TripProvider>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/log" element={<LogTrip />} />
+            <Route path="/trips" element={<MyTrips />} />
+            <Route path="/trips/:id" element={<TripDetails />} />
+            <Route path="/about" element={<About />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Layout>
+      </TripProvider>
     </BrowserRouter>
   );
 }
